@@ -5,15 +5,19 @@ const liveblocks = new Liveblocks({
 });
 
 exports.handler = async (event) => {
-  const { room, userId } = JSON.parse(event.body || "{}");
+  const body = JSON.parse(event.body || "{}");
+  const userId = body.userId || "jogador-" + Math.random().toString(36).slice(2, 7);
 
-  const { body, status } = await liveblocks.identifyUser(
-    { userId: userId || "anonymous" },
-    { userInfo: { name: userId || "Jogador" } }
-  );
+  const session = liveblocks.prepareSession(userId, {
+    userInfo: { name: userId },
+  });
+
+  session.allow("*", session.FULL_ACCESS);
+
+  const { body: responseBody, status } = await session.authorize();
 
   return {
     statusCode: status,
-    body,
+    body: responseBody,
   };
 };
