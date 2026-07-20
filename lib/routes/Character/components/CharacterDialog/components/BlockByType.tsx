@@ -112,6 +112,7 @@ export function BlockByType(props: {
           label={block.label}
           value={block.value}
           checked={block.meta.checked}
+          labelEditable={block.meta.labelEditable}
           onLabelChange={handleLabelChange}
           onValueChange={handleValueChange}
           onMetaChange={handleMetaChange}
@@ -266,6 +267,7 @@ export function BlockByType(props: {
             label={block.label}
             value={block.value}
             checked={block.meta.checked}
+            labelEditable={block.meta.labelEditable}
             onLabelChange={handleLabelChange}
             onValueChange={handleValueChange}
             onMetaChange={handleMetaChange}
