@@ -21,6 +21,7 @@ export const BlockText = React.memo(function (
     label: string | undefined;
     value: string | undefined;
     checked: boolean | undefined;
+    labelEditable: boolean | undefined;
     advanced: boolean;
     readonly: boolean | undefined;
     dataCy?: string;
@@ -44,6 +45,7 @@ export const BlockText = React.memo(function (
               advanced={props.advanced}
               readonly={props.readonly}
               dataCy={props.dataCy}
+              labelEditable={props.labelEditable}
               onChange={props.onLabelChange}
             />
             <BlockTextValue
@@ -73,6 +75,7 @@ BlockText.displayName = "BlockText";
 function BlockTextLabel(props: {
   label: string | undefined;
   advanced: boolean;
+  labelEditable: boolean | undefined;  // adiciona isso
   readonly: boolean | undefined;
   dataCy: string | undefined;
   onChange(value: string): void;
@@ -91,7 +94,7 @@ function BlockTextLabel(props: {
     <Box>
       <ThemedLabel>
         <ContentEditable
-          readonly={props.readonly || !props.advanced}
+          readonly={props.readonly || (!props.advanced && !props.labelEditable)}
           border={props.advanced}
           borderColor={miniTheme.borderColor}
           dataCy={`${props.dataCy}.label`}
@@ -143,6 +146,7 @@ export const BlockTextActions = React.memo(
       value: string | undefined;
       label: string | undefined;
       checked: boolean | undefined;
+      labelEditable: boolean | undefined;
     } & IBlockHandlers<ITextBlock>
   ) => {
     const theme = useTheme();
@@ -203,6 +207,24 @@ export const BlockTextActions = React.memo(
             {props.value === undefined
               ? t("character-dialog.control.add-field")
               : t("character-dialog.control.remove-field")}
+          </Link>
+        </Grid>
+         <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            sx={{ color: theme.palette.primary.main }}
+            onClick={() => {
+              props.onMetaChange((prev) => ({
+                ...prev,
+                labelEditable: !prev.labelEditable,
+              }));
+            }}
+            underline="hover"
+          >
+            {props.labelEditable
+              ? "Travar título"
+              : "Permitir editar título"}
           </Link>
         </Grid>
         <Grid item>
