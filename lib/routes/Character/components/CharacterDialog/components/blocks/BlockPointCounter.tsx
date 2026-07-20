@@ -100,6 +100,7 @@ export const BlockPointCounter = React.memo(
       advanced: boolean;
       readonly: boolean | undefined;
       dataCy?: string;
+      labelEditable: boolean | undefined
     } & IBlockHandlers<IPointCounterBlock>
   ) => {
     const { t } = useTranslate();
@@ -138,7 +139,7 @@ export const BlockPointCounter = React.memo(
                   <ThemedLabel sx={{ textAlign: "center" }}>
                     <ContentEditable
                       dataCy={`${props.dataCy}.label`}
-                      readonly={props.readonly || !props.advanced}
+                      readonly={props.readonly || (!props.advanced && !props.labelEditable)}
                       border={props.advanced}
                       value={props.label || ""}
                       onChange={(value) => {
@@ -233,6 +234,7 @@ BlockPointCounter.displayName = "BlockPointCounter";
 export function BlockPointCounterActions(
   props: IBlockActionComponentProps<IPointCounterBlock> & {
     onMainPointCounterChange?(): void;
+    labelEditable?: boolean
   }
 ) {
   const theme = useTheme();
@@ -278,6 +280,22 @@ export function BlockPointCounterActions(
             : t("character-dialog.control.remove-max")}
         </Link>
       </Grid>
+      <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            sx={{ color: theme.palette.primary.main }}
+            onClick={() => {
+              props.onMetaChange((prev) => ({
+                ...prev,
+                labelEditable: !prev.labelEditable,
+              }));
+            }}
+            underline="hover"
+          >
+            {props.labelEditable ? "Travar título" : "Permitir editar título"}
+          </Link>
+        </Grid>
     </>
   );
 }
