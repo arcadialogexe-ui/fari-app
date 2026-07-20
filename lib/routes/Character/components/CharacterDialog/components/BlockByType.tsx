@@ -124,7 +124,6 @@ export function BlockByType(props: {
           dataCy={props.dataCy}
           readonly={props.readonly}
           value={block.value}
-          labelEditable={block.meta.labelEditable}
           onLabelChange={handleLabelChange}
           onValueChange={handleValueChange}
           onMetaChange={handleMetaChange}
@@ -138,7 +137,6 @@ export function BlockByType(props: {
           label={block.label}
           value={block.value}
           checked={block.meta.checked}
-          labelEditable={block.meta.labelEditable}
           onLabelChange={handleLabelChange}
           onValueChange={handleValueChange}
           onMetaChange={handleMetaChange}
@@ -151,7 +149,6 @@ export function BlockByType(props: {
           readonly={props.readonly}
           label={block.label}
           value={block.value}
-          labelEditable={block.meta.labelEditable}
           onLabelChange={handleLabelChange}
           onValueChange={handleValueChange}
           onMetaChange={handleMetaChange}
@@ -203,7 +200,6 @@ export function BlockByType(props: {
           label={block.label}
           value={block.value}
           max={block.meta.max}
-          labelEditable={block.meta.labelEditable}
           onLabelChange={handleLabelChange}
           onValueChange={handleValueChange}
           onMetaChange={handleMetaChange}
@@ -216,7 +212,6 @@ export function BlockByType(props: {
           dataCy={props.dataCy}
           readonly={props.readonly}
           block={block}
-          labelEditable={block.meta.labelEditable}
           onLabelChange={handleLabelChange}
           onValueChange={handleValueChange}
           onMetaChange={handleMetaChange}
@@ -285,7 +280,6 @@ export function BlockByType(props: {
             label={block.label}
             value={block.value}
             checked={block.meta.checked}
-            labelEditable={block.meta.labelEditable}
             onLabelChange={handleLabelChange}
             onValueChange={handleValueChange}
             onMetaChange={handleMetaChange}
@@ -294,7 +288,6 @@ export function BlockByType(props: {
         {block.type === BlockType.SlotTracker && (
           <BlockSlotTrackerActions
             block={block}
-            labelEditable={block.meta.labelEditable}
             onLabelChange={handleLabelChange}
             onValueChange={handleValueChange}
             onMetaChange={handleMetaChange}
@@ -327,7 +320,6 @@ export function BlockByType(props: {
         {block.type === BlockType.Link && (
           <BlockLinkActions
             hasDisplayName={block.meta.hasDisplayName}
-            labelEditable={block.meta.labelEditable}
             onLabelChange={handleLabelChange}
             onValueChange={handleValueChange}
             onMetaChange={handleMetaChange}

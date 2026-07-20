@@ -51,13 +51,13 @@ export const BlockDicePool = React.memo(
       label: string | undefined;
       value: string | undefined;
       checked: boolean | undefined;
-      labelEditable: boolean | undefined
       advanced: boolean;
       readonly: boolean | undefined;
       blockId: string;
       blockType: BlockType;
       hideModifier: boolean | undefined;
       commands: Array<IDiceCommandId> | undefined;
+      labelEditable?: boolean;
       dataCy?: string;
       mid?: React.ReactNode;
       onRoll(diceRollResult: IDicePoolResult): void;
@@ -344,7 +344,7 @@ export const BlockDicePool = React.memo(
       return (
         <ThemedLabel>
           <ContentEditable
-            readonly={props.readonly || (!props.advanced && !props.labelEditable)}            
+            readonly={props.readonly || (!props.advanced && !props.labelEditable)}
             border={props.advanced}
             dataCy={`${props.dataCy}.label`}
             value={props.label || ""}
@@ -462,7 +462,7 @@ export const BlockDicePoolActions = React.memo(
       value: string | undefined;
       label: string | undefined;
       checked: boolean | undefined;
-      labelEditable: boolean | undefined;
+      labelEditable?: boolean;
     } & IBlockHandlers<IDicePoolBlock>
   ) => {
     const { t } = useTranslate();
@@ -508,7 +508,6 @@ export const BlockDicePoolActions = React.memo(
             {props.labelEditable ? "Travar título" : "Permitir editar título"}
           </Link>
         </Grid>
-        
       </>
     );
   },
