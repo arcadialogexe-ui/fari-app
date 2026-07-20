@@ -344,7 +344,7 @@ export const BlockDicePool = React.memo(
       return (
         <ThemedLabel>
           <ContentEditable
-            readonly={props.readonly || !props.advanced}
+            readonly={props.readonly || (!props.advanced && !props.labelEditable)}            
             border={props.advanced}
             dataCy={`${props.dataCy}.label`}
             value={props.label || ""}
@@ -462,6 +462,7 @@ export const BlockDicePoolActions = React.memo(
       value: string | undefined;
       label: string | undefined;
       checked: boolean | undefined;
+      labelEditable: boolean | undefined;
     } & IBlockHandlers<IDicePoolBlock>
   ) => {
     const { t } = useTranslate();
@@ -491,6 +492,23 @@ export const BlockDicePoolActions = React.memo(
               : t("character-dialog.control.remove-toggle")}
           </Link>
         </Grid>
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            sx={{ color: theme.palette.primary.main }}
+            onClick={() => {
+              props.onMetaChange((prev) => ({
+                ...prev,
+                labelEditable: !prev.labelEditable,
+              }));
+            }}
+            underline="hover"
+          >
+            {props.labelEditable ? "Travar título" : "Permitir editar título"}
+          </Link>
+        </Grid>
+        
       </>
     );
   },
