@@ -51,6 +51,7 @@ export const BlockDicePool = React.memo(
       label: string | undefined;
       value: string | undefined;
       checked: boolean | undefined;
+      labelEditable: boolean | undefined
       advanced: boolean;
       readonly: boolean | undefined;
       blockId: string;
