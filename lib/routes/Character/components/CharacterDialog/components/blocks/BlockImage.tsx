@@ -28,6 +28,7 @@ export const BlockImage = React.memo(
       advanced: boolean;
       readonly: boolean | undefined;
       dataCy?: string;
+      labelEditable: boolean | undefined
     } & IBlockHandlers<IImageBlock>
   ) => {
     const { t } = useTranslate();
@@ -73,7 +74,7 @@ export const BlockImage = React.memo(
               <Grid item xs>
                 <ThemedLabel>
                   <ContentEditable
-                    readonly={props.readonly}
+                    readonly={props.readonly || (!props.advanced && !props.labelEditable)}
                     border={props.advanced}
                     dataCy={`${props.dataCy}.label`}
                     value={props.label || ""}
