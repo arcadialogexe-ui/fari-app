@@ -135,6 +135,7 @@ export type ITextBlock = {
   type: BlockType.Text;
   meta: IDefaultBlockMeta & {
     checked?: boolean;
+    labelEditable?: boolean;
   };
   value: string | undefined;
 };
