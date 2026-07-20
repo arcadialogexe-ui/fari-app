@@ -18,6 +18,7 @@ export const BlockNumeric = React.memo(
       label: string | undefined;
       value: string | undefined;
       checked: boolean | undefined;
+      labelEditable: boolean | undefined;
       advanced: boolean;
       readonly: boolean | undefined;
       dataCy?: string;
@@ -47,7 +48,7 @@ export const BlockNumeric = React.memo(
             <Grid item xs>
               <ThemedLabel>
                 <ContentEditable
-                  readonly={props.readonly}
+                  readonly={props.readonly || (!props.advanced && !props.labelEditable)}
                   border={props.advanced}
                   dataCy={`${props.dataCy}.label`}
                   value={props.label || ""}
@@ -78,6 +79,7 @@ export const BlockNumericActions = React.memo(
       value: string | undefined;
       label: string | undefined;
       checked: boolean | undefined;
+      labelEditable: boolean | undefined;
     } & IBlockHandlers<INumericBlock>
   ) => {
     const theme = useTheme();
@@ -92,19 +94,20 @@ export const BlockNumericActions = React.memo(
 
     return (
       <>
-        <Grid item>
+       <Grid item>
           <Link
             component="button"
             variant="caption"
-            sx={{
-              color: theme.palette.primary.main,
+            sx={{ color: theme.palette.primary.main }}
+            onClick={() => {
+              props.onMetaChange((prev) => ({
+                ...prev,
+                labelEditable: !prev.labelEditable,
+              }));
             }}
-            onClick={handleAddRemoveToggle}
             underline="hover"
           >
-            {props.checked === undefined
-              ? t("character-dialog.control.add-toggle")
-              : t("character-dialog.control.remove-toggle")}
+            {props.labelEditable ? "Travar título" : "Permitir editar título"}
           </Link>
         </Grid>
       </>
