@@ -150,7 +150,6 @@ export type INumericBlock = {
   type: BlockType.Numeric;
   meta: IDefaultBlockMeta & {
     checked?: boolean;
-    labelEditable?: boolean;
   };
   value: string;
 };
@@ -171,7 +170,6 @@ export type IDicePoolBlock = {
   meta: IDefaultBlockMeta & {
     checked?: boolean;
     commands?: Array<IDiceCommandId>;
-    labelEditable?: boolean;
   };
   value: string;
 };
@@ -180,7 +178,6 @@ export type ISlotTrackerBlock = {
   type: BlockType.SlotTracker;
   meta: IDefaultBlockMeta & {
     asClock?: boolean;
-    labelEditable?: boolean;
   };
   value: Array<{
     label: string;
@@ -193,16 +190,13 @@ export type IPointCounterBlock = {
   meta: IDefaultBlockMeta & {
     isMainPointCounter: boolean;
     max: string | undefined;
-    labelEditable?: boolean;
   };
   value: string;
 };
 
 export type IImageBlock = {
   type: BlockType.Image;
-  meta: IDefaultBlockMeta & {
-    labelEditable?: boolean;
-  };
+  meta: IDefaultBlockMeta & {};
   value: string;
 };
 
