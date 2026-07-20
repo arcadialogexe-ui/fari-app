@@ -26,6 +26,7 @@ export const BlockSkill = React.memo(
       checked: boolean | undefined;
       advanced: boolean;
       readonly: boolean | undefined;
+      labelEditable?: boolean;
       blockType: BlockType;
       commands: Array<IDiceCommandId> | undefined;
       hideModifier: boolean | undefined;
@@ -49,6 +50,7 @@ export const BlockSkill = React.memo(
         blockType={props.blockType}
         hideModifier={props.hideModifier}
         commands={props.commands}
+        labelEditable={props.labelEditable}
         dataCy={props.dataCy}
         onLabelChange={props.onLabelChange}
         onValueChange={props.onValueChange}
@@ -80,6 +82,7 @@ export const BlockSkillActions = React.memo(
       label: string | undefined;
       checked: boolean | undefined;
       hideModifier: boolean | undefined;
+      labelEditable?: boolean;
     } & IBlockHandlers<ISkillBlock>
   ) => {
     const theme = useTheme();
@@ -126,6 +129,23 @@ export const BlockSkillActions = React.memo(
             {props.checked === undefined
               ? t("character-dialog.control.add-toggle")
               : t("character-dialog.control.remove-toggle")}
+          </Link>
+        </Grid>
+
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            sx={{ color: theme.palette.primary.main }}
+            onClick={() => {
+              props.onMetaChange((prev) => ({
+                ...prev,
+                labelEditable: !prev.labelEditable,
+              }));
+            }}
+            underline="hover"
+          >
+            {props.labelEditable ? "Travar título" : "Permitir editar título"}
           </Link>
         </Grid>
       </>
