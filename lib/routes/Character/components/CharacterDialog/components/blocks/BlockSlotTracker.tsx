@@ -149,7 +149,7 @@ export function BlockSlotTracker(
                   >
                     <ContentEditable
                       dataCy={`${props.dataCy}.label`}
-                      readonly={props.readonly || !props.advanced}
+                      readonly={props.readonly || (!props.advanced && !props.block.meta.labelEditable)}
                       border={props.advanced}
                       value={props.block.label || ""}
                       onChange={(value) => {
@@ -299,6 +299,22 @@ export function BlockSlotTrackerActions(
             : t("character-dialog.control.as-clock")}
         </Link>
       </Grid>
+      <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            sx={{ color: theme.palette.primary.main }}
+            onClick={() => {
+              props.onMetaChange((prev) => ({
+                ...prev,
+                labelEditable: !prev.labelEditable,
+              }));
+            }}
+            underline="hover"
+          >
+            {props.labelEditable ? "Travar título" : "Permitir editar título"}
+          </Link>
+        </Grid>
     </>
   );
 }
